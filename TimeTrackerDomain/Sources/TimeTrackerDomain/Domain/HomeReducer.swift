@@ -29,7 +29,11 @@ public extension HomeReducer {
       return .run { [self] in
         try await entriesRepository.fetchEntries()
         for await value in self.entriesRepository.entries.values {
-          await $0(.onEntriesLoaded(value))
+          await $0(
+            .onEntriesLoaded(
+              value.filter { $0.isCompleted }
+            )
+          )
         }
       }
     case .onEntriesLoaded(let entries):

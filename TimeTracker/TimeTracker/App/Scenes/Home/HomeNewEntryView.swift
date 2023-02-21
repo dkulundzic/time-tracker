@@ -4,25 +4,28 @@ import TimeTrackerDomain
 
 struct HomeNewEntryView: View {
   let store: StoreOf<NewEntryReducer>
-  @State private var description = ""
 
   var body: some View {
     WithViewStore(store, observe: { $0 }) { viewStore in
       HStack {
 #warning("TODO: Localise")
-        TextField("Description", text: $description)
+        TextField(
+          "Description",
+          text: viewStore.binding(
+            get: \.description,
+            send: { .onDescriptionChanged($0) }
+          )
+        )
 
         Button {
           viewStore.send(.onActionInvoked)
         } label: {
-          Image(systemName: viewStore.isStarted ? "stop.fill" : "play.fill")
+          Image(systemName: viewStore.startDate != nil ? "stop.fill" : "play.fill")
         }
+        .disabled(!viewStore.isEligibleToStart)
         .opacity(viewStore.isEligibleToStart ? 1.0 : 0.0)
         .animation(.default, value: viewStore.isEligibleToStart)
         .animation(.default, value: viewStore.isStarted)
-        .onChange(of: description) { description in
-          viewStore.send(.onDescriptionChanged(description))
-        }
       }
     }
   }

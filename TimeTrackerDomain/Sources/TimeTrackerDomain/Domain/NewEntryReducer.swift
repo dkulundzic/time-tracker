@@ -10,8 +10,9 @@ public final class NewEntryReducer: ReducerProtocol {
     case onDescriptionChanged(String)
     case onActionInvoked
     case onEntryStarted
+    case onEntryStartPersisted(TaskResult<Void>)
     case onEntryCompleted
-    case onEntryUpdated
+    case onEntryCompletionPersisted(TaskResult<Void>)
   }
 
   public struct State: Equatable {
@@ -24,11 +25,14 @@ public final class NewEntryReducer: ReducerProtocol {
       startDate != nil
     }
 
-    public var isCompleted: Bool {
-      endDate != nil
-    }
-
     public init() { }
+
+    mutating func reset() {
+      isEligibleToStart = false
+      description = ""
+      startDate = nil
+      endDate = nil
+    }
   }
 
   public init() { }
@@ -50,7 +54,26 @@ public extension NewEntryReducer {
 
     case .onEntryStarted:
       let startDate = Date()
-      let endDate = startDate.addingTimeInterval(7200)
+      state.startDate = startDate
+
+      let entry = Entry(
+        id: (0...1000000).randomElement()!,
+        description: state.description,
+        start: startDate
+      )
+
+      return .task { [self] in
+        return await .onEntryStartPersisted(
+          TaskResult { _ = try await self.entriesRepository.storeEntry(entry) }
+        )
+      }
+
+    case .onEntryCompleted:
+      guard let startDate = state.startDate else { return .none }
+
+      let endDate = Date()
+      state.endDate = endDate
+
       let entry = Entry(
         id: (0...1000000).randomElement()!,
         description: state.description,
@@ -59,14 +82,24 @@ public extension NewEntryReducer {
       )
 
       return .task { [self] in
-        try await self.entriesRepository.storeEntry(entry)
-        return .onEntryUpdated
+        return await .onEntryCompletionPersisted(
+          TaskResult { _ = try await self.entriesRepository.storeEntry(entry) }
+        )
       }
 
-    case .onEntryCompleted:
+    case .onEntryStartPersisted(.success):
       return .none
 
-    case .onEntryUpdated:
+    case .onEntryStartPersisted(.failure(let error)):
+      print(#function, error)
+      return .none
+
+    case .onEntryCompletionPersisted(.success):
+      state.reset()
+      return .none
+
+    case .onEntryCompletionPersisted(.failure(let error)):
+      print(#function, error)
       return .none
     }
   }

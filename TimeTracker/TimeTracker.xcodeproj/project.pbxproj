@@ -25,6 +25,7 @@
 		2F49A9EA29A4E83700258559 /* TimeTrackerDomain */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = TimeTrackerDomain; path = ../TimeTrackerDomain; sourceTree = "<group>"; };
 		2F49A9EB29A4E83C00258559 /* TimeTrackerModel */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = TimeTrackerModel; path = ../TimeTrackerModel; sourceTree = "<group>"; };
 		2F49A9EC29A4E84200258559 /* TimeTrackerPersistence */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = TimeTrackerPersistence; path = ../TimeTrackerPersistence; sourceTree = "<group>"; };
+		2F49A9FB29A4E99000258559 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +63,7 @@
 		2F49A9D729A4E6CC00258559 /* TimeTracker */ = {
 			isa = PBXGroup;
 			children = (
+				2F49A9FB29A4E99000258559 /* Info.plist */,
 				2F49A9E629A4E6EC00258559 /* App */,
 				2F49A9DC29A4E6CD00258559 /* Assets.xcassets */,
 				2F49A9E829A4E6F500258559 /* Resources */,
@@ -366,7 +368,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"TimeTracker/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_FILE = TimeTracker/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -398,7 +400,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"TimeTracker/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_FILE = TimeTracker/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;

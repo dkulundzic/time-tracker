@@ -7,18 +7,13 @@ public final class HomeReducer: ReducerProtocol {
 
   public enum Action {
     case onFirstAppear
-    case onEntriesLoaded(TaskResult<[Entry]>)
-    case onNewEntryTextChanged(String)
-    case onNewEntryStarted
+    case onEntriesLoaded([Entry])
   }
 
   public struct State: Equatable {
-    public var newEntryText = ""
-    public var entries: [Entry]
+    public var entries: [Entry] = []
 
-    public init(entries: [Entry] = [.mock, .mock, .mock]) {
-      self.entries = entries
-    }
+    public init() { }
   }
 
   public init() { }
@@ -31,15 +26,14 @@ public extension HomeReducer {
   ) -> EffectTask<Action> {
     switch action {
     case .onFirstAppear:
-      return .none
-    case .onNewEntryTextChanged(let text):
-      state.newEntryText = text
-      return .none
-    case .onNewEntryStarted:
-      return .none
-    case .onEntriesLoaded(.success(let entries)):
-      return .none
-    case .onEntriesLoaded(.failure(let error)):
+      return .run { [self] in
+        try await entriesRepository.fetchEntries()
+        for await value in self.entriesRepository.entries.values {
+          await $0(.onEntriesLoaded(value))
+        }
+      }
+    case .onEntriesLoaded(let entries):
+      state.entries = entries
       return .none
     }
   }

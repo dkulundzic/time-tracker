@@ -22,6 +22,18 @@ public struct Entry: Equatable, Identifiable {
   public static func ==(lhs: Entry, rhs: Entry) -> Bool {
     lhs.id == rhs.id
   }
+
+  public init(
+    id: Int,
+    description: String,
+    start: Date,
+    end: Date? = nil
+  ) {
+    self.id = id
+    self.description = description
+    self.start = start
+    self.end = end
+  }
 }
 
 public extension Entry {

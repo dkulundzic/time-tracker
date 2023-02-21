@@ -1,14 +1,28 @@
 import SwiftUI
+import ComposableArchitecture
+import TimeTrackerDomain
 
 struct HomeNewEntryView: View {
-  @Binding var description: String
-  let onStartTap: () -> Void
+  let store: StoreOf<NewEntryReducer>
+  @State private var description = ""
 
   var body: some View {
-    HStack {
-      TextField("Description", text: $description)
-      Button(action: onStartTap) {
-        Image(systemName: "play.fill")
+    WithViewStore(store, observe: { $0 }) { viewStore in
+      HStack {
+#warning("TODO: Localise")
+        TextField("Description", text: $description)
+
+        Button {
+          viewStore.send(.onActionInvoked)
+        } label: {
+          Image(systemName: viewStore.isStarted ? "stop.fill" : "play.fill")
+        }
+        .opacity(viewStore.isEligibleToStart ? 1.0 : 0.0)
+        .animation(.default, value: viewStore.isEligibleToStart)
+        .animation(.default, value: viewStore.isStarted)
+        .onChange(of: description) { description in
+          viewStore.send(.onDescriptionChanged(description))
+        }
       }
     }
   }
@@ -16,6 +30,11 @@ struct HomeNewEntryView: View {
 
 struct HomeNewEntryView_Previews: PreviewProvider {
   static var previews: some View {
-    HomeNewEntryView(description: .constant("")) { }
+    HomeNewEntryView(
+      store: Store(
+        initialState: .init(),
+        reducer: NewEntryReducer()
+      )
+    )
   }
 }

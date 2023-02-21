@@ -1,46 +1,51 @@
 import Foundation
+import Combine
 import TimeTrackerModel
 
 public protocol EntriesRepository {
-  func fetchEntries() async throws -> [Entry]
+  var entries: AnyPublisher<[Entry], Never> { get }
+  func fetchEntries() async throws
   func storeEntry(_ entry: Entry) async throws -> Entry
   func removeEntry(id: Int) async throws -> Bool
 }
 
 public final class DefaultEntriesRepository: EntriesRepository {
-  private var entries: [Entry] = []
+  public var entries: AnyPublisher<[Entry], Never> {
+    entriesSubject.eraseToAnyPublisher()
+  }
+
+  private let entriesSubject = CurrentValueSubject<[Entry], Never>([])
 
   public init() { }
 
-  public func fetchEntries() async throws -> [Entry] {
-    entries
-  }
+  public func fetchEntries() async throws { }
 
   public func storeEntry(_ entry: Entry) async throws -> Entry {
-    guard !entries.contains(entry) else {
+    guard !entriesSubject.value.contains(entry) else {
       return entry
     }
-    entries.append(entry)
+    entriesSubject.value.append(entry)
     return entry
   }
 
   public func removeEntry(id: Int) async throws -> Bool {
-    guard let indexOf = entries.firstIndex(where: { $0.id == id }) else {
+    guard let indexOf = entriesSubject
+      .value
+      .firstIndex(where: { $0.id == id }) else {
       return false
     }
-    entries.remove(at: indexOf)
+    entriesSubject.value.remove(at: indexOf)
     return true
   }
 }
 
 public final class TestEntriesRepository: EntriesRepository {
+  public let entries = PassthroughSubject<[Entry], Never>().eraseToAnyPublisher()
   public init() { }
 
-  public func fetchEntries() async throws -> [Entry] {
-    []
-  }
+  public func fetchEntries() async throws { }
 
-  public func storeEntry(_ entry: TimeTrackerModel.Entry) async throws -> TimeTrackerModel.Entry {
+  public func storeEntry(_ entry: TimeTrackerModel.Entry) async throws -> Entry {
     fatalError("Not implemented...")
   }
 

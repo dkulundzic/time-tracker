@@ -11,7 +11,7 @@ struct TimeTrackerApp: App {
           initialState: .init(),
           reducer: HomeReducer()
         )
-      ) 
+      )
     }
   }
 }

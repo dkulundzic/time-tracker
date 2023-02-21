@@ -4,7 +4,6 @@ import TimeTrackerDomain
 
 struct HomeView: View {
   let store: StoreOf<HomeReducer>
-  @State private var newEntryText: String = ""
 
   var body: some View {
     NavigationStack {
@@ -12,21 +11,20 @@ struct HomeView: View {
         List {
           Section("Start new entry") {
             HomeNewEntryView(
-              description: viewStore.binding(
-                get: { $0.newEntryText },
-                send: { .onNewEntryTextChanged($0) }
-              )) {
-                viewStore.send(.onNewEntryStarted)
-              }
+              store: Store(
+                initialState: .init(),
+                reducer: NewEntryReducer()
+              )
+            )
           }
 
           Section("Entries") {
             HomeListView(entries: viewStore.entries)
           }
         }
-        .onChange(of: newEntryText) { text in
-          viewStore.send(.onNewEntryTextChanged(text))
-        }
+        .onFirstAppear { viewStore.send(.onFirstAppear) }
+        .animation(.default, value: viewStore.entries)
+        .scrollDismissesKeyboard(.immediately)
       }
       .navigationTitle("Home")
     }

@@ -10,6 +10,7 @@
 		2F118CE329A4FB060094F1CF /* HomeListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F118CE229A4FB060094F1CF /* HomeListView.swift */; };
 		2F118CE529A4FB690094F1CF /* HomeListItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F118CE429A4FB690094F1CF /* HomeListItemView.swift */; };
 		2F118CE729A4FEA80094F1CF /* HomeNewEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F118CE629A4FEA80094F1CF /* HomeNewEntryView.swift */; };
+		2F118CEC29A519BF0094F1CF /* ViewFirstAppearModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F118CEB29A519BF0094F1CF /* ViewFirstAppearModifier.swift */; };
 		2F49A9D929A4E6CC00258559 /* TimeTrackerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F49A9D829A4E6CC00258559 /* TimeTrackerApp.swift */; };
 		2F49A9DB29A4E6CC00258559 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F49A9DA29A4E6CC00258559 /* HomeView.swift */; };
 		2F49A9DD29A4E6CD00258559 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2F49A9DC29A4E6CD00258559 /* Assets.xcassets */; };
@@ -23,6 +24,7 @@
 		2F118CE229A4FB060094F1CF /* HomeListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeListView.swift; sourceTree = "<group>"; };
 		2F118CE429A4FB690094F1CF /* HomeListItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeListItemView.swift; sourceTree = "<group>"; };
 		2F118CE629A4FEA80094F1CF /* HomeNewEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeNewEntryView.swift; sourceTree = "<group>"; };
+		2F118CEB29A519BF0094F1CF /* ViewFirstAppearModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewFirstAppearModifier.swift; sourceTree = "<group>"; };
 		2F49A9D529A4E6CC00258559 /* TimeTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TimeTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F49A9D829A4E6CC00258559 /* TimeTrackerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTrackerApp.swift; sourceTree = "<group>"; };
 		2F49A9DA29A4E6CC00258559 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -48,6 +50,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2F118CE829A519AF0094F1CF /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				2F118CE929A519B60094F1CF /* UI */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		2F118CE929A519B60094F1CF /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				2F118CEA29A519B90094F1CF /* Modifiers */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		2F118CEA29A519B90094F1CF /* Modifiers */ = {
+			isa = PBXGroup;
+			children = (
+				2F118CEB29A519BF0094F1CF /* ViewFirstAppearModifier.swift */,
+			);
+			path = Modifiers;
+			sourceTree = "<group>";
+		};
 		2F49A9CC29A4E6CC00258559 = {
 			isa = PBXGroup;
 			children = (
@@ -71,6 +97,7 @@
 			children = (
 				2F49A9FB29A4E99000258559 /* Info.plist */,
 				2F49A9E629A4E6EC00258559 /* App */,
+				2F118CE829A519AF0094F1CF /* Common */,
 				2F49A9E829A4E6F500258559 /* Resources */,
 				2F49A9DE29A4E6CD00258559 /* Preview Content */,
 			);
@@ -215,6 +242,7 @@
 /* Begin PBXShellScriptBuildPhase section */
 		2F49A9F329A4E84E00258559 /* Run SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -241,6 +269,7 @@
 				2F118CE729A4FEA80094F1CF /* HomeNewEntryView.swift in Sources */,
 				2F118CE529A4FB690094F1CF /* HomeListItemView.swift in Sources */,
 				2F118CE329A4FB060094F1CF /* HomeListView.swift in Sources */,
+				2F118CEC29A519BF0094F1CF /* ViewFirstAppearModifier.swift in Sources */,
 				2F49A9DB29A4E6CC00258559 /* HomeView.swift in Sources */,
 				2F49A9D929A4E6CC00258559 /* TimeTrackerApp.swift in Sources */,
 			);

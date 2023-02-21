@@ -1,5 +1,0 @@
-strings:
-  inputs: Sources/TimeTrackerDomain/Resources/Localization/en.lproj/Localizable.strings
-  outputs:
-    templateName: structured-swift5
-    output: Sources/TimeTrackerDomain/Resources/Localization/Generated/Strings.swift

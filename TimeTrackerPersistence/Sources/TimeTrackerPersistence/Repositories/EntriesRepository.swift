@@ -10,6 +10,8 @@ public protocol EntriesRepository {
 public final class DefaultEntriesRepository: EntriesRepository {
   private var entries: [Entry] = []
 
+  public init() { }
+
   public func fetchEntries() async throws -> [Entry] {
     entries
   }

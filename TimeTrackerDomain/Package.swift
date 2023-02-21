@@ -14,6 +14,7 @@ let package = Package(
   ],
   dependencies: [
     .package(path: "../TimeTrackerModel"),
+    .package(path: "../TimeTrackerPersistence"),
     .package(url: "https://github.com/pointfreeco/swift-composable-architecture", from: "0.51.0"),
   ],
   targets: [
@@ -23,6 +24,7 @@ let package = Package(
       name: "TimeTrackerDomain",
       dependencies: [
         "TimeTrackerModel",
+        "TimeTrackerPersistence",
         .product(name: "ComposableArchitecture", package: "swift-composable-architecture")
       ]
     ),
@@ -31,6 +33,7 @@ let package = Package(
       dependencies: [
         "TimeTrackerDomain",
         "TimeTrackerModel",
+        "TimeTrackerPersistence",
         .product(name: "ComposableArchitecture", package: "swift-composable-architecture")
       ]),
   ]

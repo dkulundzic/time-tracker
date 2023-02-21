@@ -1,6 +1,6 @@
 import Foundation
 
-public struct Entry: Equatable {
+public struct Entry: Equatable, Identifiable {
   public let id: Int
   public let description: String
   public let start: Date

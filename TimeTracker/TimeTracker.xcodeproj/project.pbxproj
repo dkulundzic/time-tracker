@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2F49A9D929A4E6CC00258559 /* TimeTrackerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F49A9D829A4E6CC00258559 /* TimeTrackerApp.swift */; };
-		2F49A9DB29A4E6CC00258559 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F49A9DA29A4E6CC00258559 /* ContentView.swift */; };
+		2F49A9DB29A4E6CC00258559 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F49A9DA29A4E6CC00258559 /* HomeView.swift */; };
 		2F49A9DD29A4E6CD00258559 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2F49A9DC29A4E6CD00258559 /* Assets.xcassets */; };
 		2F49A9E029A4E6CD00258559 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2F49A9DF29A4E6CD00258559 /* Preview Assets.xcassets */; };
 		2F49A9F629A4E86F00258559 /* TimeTrackerDomain in Frameworks */ = {isa = PBXBuildFile; productRef = 2F49A9F529A4E86F00258559 /* TimeTrackerDomain */; };
@@ -19,7 +19,7 @@
 /* Begin PBXFileReference section */
 		2F49A9D529A4E6CC00258559 /* TimeTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TimeTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F49A9D829A4E6CC00258559 /* TimeTrackerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTrackerApp.swift; sourceTree = "<group>"; };
-		2F49A9DA29A4E6CC00258559 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		2F49A9DA29A4E6CC00258559 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		2F49A9DC29A4E6CD00258559 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2F49A9DF29A4E6CD00258559 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		2F49A9EA29A4E83700258559 /* TimeTrackerDomain */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = TimeTrackerDomain; path = ../TimeTrackerDomain; sourceTree = "<group>"; };
@@ -45,10 +45,10 @@
 		2F49A9CC29A4E6CC00258559 = {
 			isa = PBXGroup;
 			children = (
-				2F49A9E929A4E83700258559 /* Packages */,
-				2F49A9D729A4E6CC00258559 /* TimeTracker */,
-				2F49A9D629A4E6CC00258559 /* Products */,
 				2F49A9F429A4E86F00258559 /* Frameworks */,
+				2F49A9E929A4E83700258559 /* Packages */,
+				2F49A9D629A4E6CC00258559 /* Products */,
+				2F49A9D729A4E6CC00258559 /* TimeTracker */,
 			);
 			sourceTree = "<group>";
 		};
@@ -65,7 +65,6 @@
 			children = (
 				2F49A9FB29A4E99000258559 /* Info.plist */,
 				2F49A9E629A4E6EC00258559 /* App */,
-				2F49A9DC29A4E6CD00258559 /* Assets.xcassets */,
 				2F49A9E829A4E6F500258559 /* Resources */,
 				2F49A9DE29A4E6CD00258559 /* Preview Content */,
 			);
@@ -92,7 +91,7 @@
 		2F49A9E729A4E6EF00258559 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
-				2F49A9DA29A4E6CC00258559 /* ContentView.swift */,
+				2F49A9FC29A4ED3B00258559 /* Home */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -100,6 +99,7 @@
 		2F49A9E829A4E6F500258559 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				2F49A9DC29A4E6CD00258559 /* Assets.xcassets */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -119,6 +119,14 @@
 			children = (
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		2F49A9FC29A4ED3B00258559 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				2F49A9DA29A4E6CC00258559 /* HomeView.swift */,
+			);
+			path = Home;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -221,7 +229,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2F49A9DB29A4E6CC00258559 /* ContentView.swift in Sources */,
+				2F49A9DB29A4E6CC00258559 /* HomeView.swift in Sources */,
 				2F49A9D929A4E6CC00258559 /* TimeTrackerApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

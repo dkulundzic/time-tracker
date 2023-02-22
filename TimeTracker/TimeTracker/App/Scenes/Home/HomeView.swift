@@ -7,24 +7,34 @@ struct HomeView: View {
 
   var body: some View {
     WithViewStore(store, observe: { $0 }) { viewStore in
-      List {
-        ForEach(viewStore.entries) { entry in
-          Menu {
+      VStack {
+        if viewStore.entries.isEmpty {
 #warning("TODO: Localise")
-            Button("Delete") {
-              viewStore.send(.onDeleteTap(entry))
+          Text("No entries yet tracked.")
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .transition(.scale.combined(with: .opacity))
+        } else {
+          List {
+            ForEach(viewStore.entries) { entry in
+              Menu {
+#warning("TODO: Localise")
+                Button("Delete") {
+                  viewStore.send(.onDeleteTap(entry))
+                }
+              } label: {
+                ItemView(entry: entry)
+              }
             }
-          } label: {
-            ItemView(entry: entry)
           }
+          .scrollDismissesKeyboard(.immediately)
+          .listStyle(PlainListStyle())
+          .transition(.slide)
         }
       }
+      .animation(.spring(), value: viewStore.entries)
       .onFirstAppear {
         viewStore.send(.onFirstAppear)
       }
-      .scrollDismissesKeyboard(.immediately)
-      .listStyle(PlainListStyle())
-      .animation(.default, value: viewStore.entries)
     }
     .navigationTitle("Home")
   }

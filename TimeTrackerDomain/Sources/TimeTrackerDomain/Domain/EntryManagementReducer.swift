@@ -3,7 +3,7 @@ import ComposableArchitecture
 import TimeTrackerPersistence
 import TimeTrackerModel
 
-public final class NewEntryReducer: ReducerProtocol {
+public final class EntryManagementReducer: ReducerProtocol {
   @Dependency(\.entriesRepository) var entriesRepository
 
   public enum Action {
@@ -38,7 +38,7 @@ public final class NewEntryReducer: ReducerProtocol {
   public init() { }
 }
 
-public extension NewEntryReducer {
+public extension EntryManagementReducer {
   func reduce(
     into state: inout State,
     action: Action
@@ -105,7 +105,7 @@ public extension NewEntryReducer {
   }
 }
 
-private extension NewEntryReducer {
+private extension EntryManagementReducer {
   func handleEntryStart(state: inout State) {
     state.startDate = Date()
   }

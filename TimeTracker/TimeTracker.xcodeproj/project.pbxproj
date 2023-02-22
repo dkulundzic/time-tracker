@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		2F118CE329A4FB060094F1CF /* HomeListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F118CE229A4FB060094F1CF /* HomeListView.swift */; };
 		2F118CE529A4FB690094F1CF /* HomeListItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F118CE429A4FB690094F1CF /* HomeListItemView.swift */; };
-		2F118CE729A4FEA80094F1CF /* HomeNewEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F118CE629A4FEA80094F1CF /* HomeNewEntryView.swift */; };
+		2F118CE729A4FEA80094F1CF /* EntryManagementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F118CE629A4FEA80094F1CF /* EntryManagementView.swift */; };
 		2F118CEC29A519BF0094F1CF /* ViewFirstAppearModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F118CEB29A519BF0094F1CF /* ViewFirstAppearModifier.swift */; };
 		2F49A9D929A4E6CC00258559 /* TimeTrackerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F49A9D829A4E6CC00258559 /* TimeTrackerApp.swift */; };
 		2F49A9DB29A4E6CC00258559 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F49A9DA29A4E6CC00258559 /* HomeView.swift */; };
@@ -23,7 +23,7 @@
 /* Begin PBXFileReference section */
 		2F118CE229A4FB060094F1CF /* HomeListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeListView.swift; sourceTree = "<group>"; };
 		2F118CE429A4FB690094F1CF /* HomeListItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeListItemView.swift; sourceTree = "<group>"; };
-		2F118CE629A4FEA80094F1CF /* HomeNewEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeNewEntryView.swift; sourceTree = "<group>"; };
+		2F118CE629A4FEA80094F1CF /* EntryManagementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryManagementView.swift; sourceTree = "<group>"; };
 		2F118CEB29A519BF0094F1CF /* ViewFirstAppearModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewFirstAppearModifier.swift; sourceTree = "<group>"; };
 		2F49A9D529A4E6CC00258559 /* TimeTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TimeTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F49A9D829A4E6CC00258559 /* TimeTrackerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTrackerApp.swift; sourceTree = "<group>"; };
@@ -72,6 +72,14 @@
 				2F118CEB29A519BF0094F1CF /* ViewFirstAppearModifier.swift */,
 			);
 			path = Modifiers;
+			sourceTree = "<group>";
+		};
+		2F118CED29A523F40094F1CF /* Entry */ = {
+			isa = PBXGroup;
+			children = (
+				2F118CE629A4FEA80094F1CF /* EntryManagementView.swift */,
+			);
+			path = Entry;
 			sourceTree = "<group>";
 		};
 		2F49A9CC29A4E6CC00258559 = {
@@ -124,6 +132,7 @@
 		2F49A9E729A4E6EF00258559 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				2F118CED29A523F40094F1CF /* Entry */,
 				2F49A9FC29A4ED3B00258559 /* Home */,
 			);
 			path = Scenes;
@@ -159,7 +168,6 @@
 			children = (
 				2F118CE429A4FB690094F1CF /* HomeListItemView.swift */,
 				2F118CE229A4FB060094F1CF /* HomeListView.swift */,
-				2F118CE629A4FEA80094F1CF /* HomeNewEntryView.swift */,
 				2F49A9DA29A4E6CC00258559 /* HomeView.swift */,
 			);
 			path = Home;
@@ -266,7 +274,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2F118CE729A4FEA80094F1CF /* HomeNewEntryView.swift in Sources */,
+				2F118CE729A4FEA80094F1CF /* EntryManagementView.swift in Sources */,
 				2F118CE529A4FB690094F1CF /* HomeListItemView.swift in Sources */,
 				2F118CE329A4FB060094F1CF /* HomeListView.swift in Sources */,
 				2F118CEC29A519BF0094F1CF /* ViewFirstAppearModifier.swift in Sources */,

@@ -2,8 +2,8 @@ import SwiftUI
 import ComposableArchitecture
 import TimeTrackerDomain
 
-struct HomeNewEntryView: View {
-  let store: StoreOf<NewEntryReducer>
+struct EntryManagementView: View {
+  let store: StoreOf<EntryManagementReducer>
 
   var body: some View {
     WithViewStore(store, observe: { $0 }) { viewStore in
@@ -27,17 +27,27 @@ struct HomeNewEntryView: View {
         .animation(.default, value: viewStore.isEligibleToStart)
         .animation(.default, value: viewStore.isStarted)
       }
+      .padding()
+      .background(
+        RoundedRectangle(cornerRadius: 16)
+          .fill(.white)
+      )
     }
   }
 }
 
 struct HomeNewEntryView_Previews: PreviewProvider {
   static var previews: some View {
-    HomeNewEntryView(
+    EntryManagementView(
       store: Store(
         initialState: .init(),
-        reducer: NewEntryReducer()
+        reducer: EntryManagementReducer()
       )
     )
+    .background(
+      RoundedRectangle(cornerRadius: 16)
+        .fill(.quaternary)
+    )
+    .previewLayout(.sizeThatFits)
   }
 }

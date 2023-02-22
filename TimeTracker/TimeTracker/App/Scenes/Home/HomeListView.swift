@@ -1,18 +1,23 @@
 import SwiftUI
 import TimeTrackerModel
 
-struct HomeListView: View {
-  let entries: [Entry]
+extension HomeView {
+  struct ListView: View {
+    let entries: [Entry]
 
-  var body: some View {
-    ForEach(entries) { entry in
-      HomeListItemView(entry: entry)
+    var body: some View {
+      VStack(alignment: .leading, spacing: 8) {
+        ForEach(entries) { entry in
+          ItemView(entry: entry)
+        }
+      }
+      .padding()
     }
   }
 }
 
 struct HomeListView_Previews: PreviewProvider {
   static var previews: some View {
-    HomeListView(entries: [.mock])
+    HomeView.ListView(entries: [.mock])
   }
 }

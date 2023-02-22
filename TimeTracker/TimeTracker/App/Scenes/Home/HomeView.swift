@@ -9,12 +9,20 @@ struct HomeView: View {
     WithViewStore(store, observe: { $0 }) { viewStore in
       List {
         ForEach(viewStore.entries) { entry in
-          ItemView(entry: entry)
+          Menu {
+#warning("TODO: Localise")
+            Button("Delete") {
+              viewStore.send(.onDeleteTap(entry))
+            }
+          } label: {
+            ItemView(entry: entry)
+          }
         }
       }
       .onFirstAppear {
         viewStore.send(.onFirstAppear)
       }
+      .animation(.default, value: viewStore.entries)
       .listStyle(PlainListStyle())
     }
     .navigationTitle("Home")

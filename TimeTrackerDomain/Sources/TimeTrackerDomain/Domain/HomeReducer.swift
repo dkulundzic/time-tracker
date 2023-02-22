@@ -8,6 +8,7 @@ public final class HomeReducer: ReducerProtocol {
   public enum Action {
     case onFirstAppear
     case onEntriesLoaded([Entry])
+    case onDeleteTap(Entry)
   }
 
   public struct State: Equatable {
@@ -39,6 +40,11 @@ public extension HomeReducer {
     case .onEntriesLoaded(let entries):
       state.entries = entries
       return .none
+
+    case .onDeleteTap(let entry):
+      return .fireAndForget {
+        _ = try await self.entriesRepository.removeEntry(id: entry.id)
+      }
     }
   }
 }

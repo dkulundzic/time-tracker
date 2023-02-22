@@ -14,7 +14,7 @@ extension HomeView {
             .fontWeight(.black)
 
           Text("Logged time: \(entry.duration.formatted())")
-            .foregroundColor(Asset.Colors.eggplant)
+            .foregroundColor(.black)
             .font(.callout)
             .fontWeight(.medium)
         }

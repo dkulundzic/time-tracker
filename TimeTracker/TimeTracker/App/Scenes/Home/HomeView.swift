@@ -18,7 +18,7 @@ struct HomeView: View {
             ForEach(viewStore.entries) { entry in
               Menu {
 #warning("TODO: Localise")
-                Button("Delete") {
+                Button("Delete", role: .destructive) {
                   viewStore.send(.onDeleteTap(entry))
                 }
               } label: {

@@ -38,7 +38,7 @@ public extension HomeReducer {
         }
       }
     case .onEntriesLoaded(let entries):
-      state.entries = entries
+      state.entries = entries.sorted(by: { $0.start > $1.start })
       return .none
 
     case .onDeleteTap(let entry):

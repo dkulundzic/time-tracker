@@ -42,7 +42,7 @@ public extension Entry {
       id: UUID(),
       description: "Work on the assignment",
       start: Date(),
-      end: nil
+      end: Date().addingTimeInterval(7200)
     )
   }
 }

@@ -17,21 +17,30 @@ struct EntryManagementView: View {
           )
         )
 
-        Button {
-          viewStore.send(.onActionInvoked)
-        } label: {
-          Image(systemName: viewStore.startDate != nil ? "stop.fill" : "play.fill")
+        HStack {
+          if let elapsedTime = viewStore.elapsedTime {
+            Text(elapsedTime)
+              .font(.callout)
+              .fontWeight(.medium)
+              .foregroundColor(Asset.Colors.accentColor)
+          }
+
+          Button {
+            viewStore.send(.onActionInvoked)
+          } label: {
+            Image(systemName: viewStore.startDate != nil ? "stop.fill" : "play.fill")
+          }
+          .disabled(!viewStore.isEligibleToStart)
+          .opacity(viewStore.isEligibleToStart ? 1.0 : 0.0)
         }
-        .disabled(!viewStore.isEligibleToStart)
-        .opacity(viewStore.isEligibleToStart ? 1.0 : 0.0)
-        .animation(.default, value: viewStore.isEligibleToStart)
-        .animation(.default, value: viewStore.isStarted)
       }
       .padding()
       .background(
         RoundedRectangle(cornerRadius: 16)
           .fill(.white)
       )
+      .animation(.default, value: viewStore.isEligibleToStart)
+      .animation(.default, value: viewStore.isStarted)
     }
   }
 }

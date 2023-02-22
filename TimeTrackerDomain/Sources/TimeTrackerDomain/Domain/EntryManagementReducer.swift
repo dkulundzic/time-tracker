@@ -7,6 +7,8 @@ public final class EntryManagementReducer: ReducerProtocol {
   @Dependency(\.entriesRepository) private var entriesRepository
   @Dependency(\.continuousClock) private var clock
   @Dependency(\.uuid) private var uuid
+  @Dependency(\.timerFormatter) private var timerFormatter
+
 
   public enum Action {
     case onDescriptionChanged(String)
@@ -24,7 +26,6 @@ public final class EntryManagementReducer: ReducerProtocol {
     public var description = ""
     public var startDate: Date?
     public var endDate: Date?
-    var elapsedSeconds = 0
 
     public var isStarted: Bool {
       startDate != nil
@@ -34,7 +35,6 @@ public final class EntryManagementReducer: ReducerProtocol {
 
     mutating func reset() {
       elapsedTime = nil
-      elapsedSeconds = 0
       isEligibleToStart = false
       description = ""
       startDate = nil
@@ -122,9 +122,8 @@ public extension EntryManagementReducer {
       return .cancel(id: TimerID.self)
 
     case .onEntryTimerTicked:
-      state.elapsedSeconds += 1
-      state.elapsedTime = state.elapsedSeconds.description
-      print(#function, state.elapsedSeconds)
+      guard let startDate = state.startDate else { return .none }
+      state.elapsedTime = timerFormatter.string(from: startDate, to: Date())
       return .none
     }
   }

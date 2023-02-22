@@ -12,7 +12,8 @@ extension HomeView {
             .foregroundColor(Asset.Colors.eggplant)
             .font(.body)
             .fontWeight(.black)
-
+          
+#warning("TODO: Localise")
           Text("Logged time: \(entry.duration.formatted())")
             .foregroundColor(.black)
             .font(.callout)

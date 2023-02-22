@@ -7,10 +7,15 @@ struct HomeView: View {
 
   var body: some View {
     WithViewStore(store, observe: { $0 }) { viewStore in
-      ListView(entries: viewStore.entries)
-        .onFirstAppear { viewStore.send(.onFirstAppear) }
-        .animation(.default, value: viewStore.entries)
-        .scrollDismissesKeyboard(.immediately)
+      List {
+        ForEach(viewStore.entries) { entry in
+          ItemView(entry: entry)
+        }
+      }
+      .onFirstAppear {
+        viewStore.send(.onFirstAppear)
+      }
+      .listStyle(PlainListStyle())
     }
     .navigationTitle("Home")
   }

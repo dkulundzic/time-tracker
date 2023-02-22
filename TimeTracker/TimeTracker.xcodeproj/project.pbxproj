@@ -7,8 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2F118CE329A4FB060094F1CF /* HomeListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F118CE229A4FB060094F1CF /* HomeListView.swift */; };
-		2F118CE529A4FB690094F1CF /* HomeListItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F118CE429A4FB690094F1CF /* HomeListItemView.swift */; };
+		2F118CE529A4FB690094F1CF /* HomeItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F118CE429A4FB690094F1CF /* HomeItemView.swift */; };
 		2F118CE729A4FEA80094F1CF /* EntryManagementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F118CE629A4FEA80094F1CF /* EntryManagementView.swift */; };
 		2F118CEC29A519BF0094F1CF /* ViewFirstAppearModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F118CEB29A519BF0094F1CF /* ViewFirstAppearModifier.swift */; };
 		2F118CF029A611010094F1CF /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2F118CEF29A611010094F1CF /* Colors.xcassets */; };
@@ -24,8 +23,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		2F118CE229A4FB060094F1CF /* HomeListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeListView.swift; sourceTree = "<group>"; };
-		2F118CE429A4FB690094F1CF /* HomeListItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeListItemView.swift; sourceTree = "<group>"; };
+		2F118CE429A4FB690094F1CF /* HomeItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeItemView.swift; sourceTree = "<group>"; };
 		2F118CE629A4FEA80094F1CF /* EntryManagementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryManagementView.swift; sourceTree = "<group>"; };
 		2F118CEB29A519BF0094F1CF /* ViewFirstAppearModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewFirstAppearModifier.swift; sourceTree = "<group>"; };
 		2F118CEF29A611010094F1CF /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
@@ -207,8 +205,7 @@
 		2F49A9FC29A4ED3B00258559 /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				2F118CE429A4FB690094F1CF /* HomeListItemView.swift */,
-				2F118CE229A4FB060094F1CF /* HomeListView.swift */,
+				2F118CE429A4FB690094F1CF /* HomeItemView.swift */,
 				2F49A9DA29A4E6CC00258559 /* HomeView.swift */,
 			);
 			path = Home;
@@ -339,8 +336,7 @@
 				2F118CF629A612A70094F1CF /* Asset+Utils.swift in Sources */,
 				2F118CE729A4FEA80094F1CF /* EntryManagementView.swift in Sources */,
 				2F118CF829A612B80094F1CF /* Assets.swift in Sources */,
-				2F118CE529A4FB690094F1CF /* HomeListItemView.swift in Sources */,
-				2F118CE329A4FB060094F1CF /* HomeListView.swift in Sources */,
+				2F118CE529A4FB690094F1CF /* HomeItemView.swift in Sources */,
 				2F118CEC29A519BF0094F1CF /* ViewFirstAppearModifier.swift in Sources */,
 				2F49A9DB29A4E6CC00258559 /* HomeView.swift in Sources */,
 				2F49A9D929A4E6CC00258559 /* TimeTrackerApp.swift in Sources */,

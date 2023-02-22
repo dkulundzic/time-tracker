@@ -6,7 +6,7 @@ public protocol EntriesRepository {
   var entries: AnyPublisher<[Entry], Never> { get }
   func fetchEntries() async throws
   func storeEntry(_ entry: Entry) async throws -> Entry
-  func removeEntry(id: Int) async throws -> Bool
+  func removeEntry(id: UUID) async throws -> Bool
 }
 
 public final class DefaultEntriesRepository: EntriesRepository {
@@ -28,7 +28,7 @@ public final class DefaultEntriesRepository: EntriesRepository {
     return entry
   }
 
-  public func removeEntry(id: Int) async throws -> Bool {
+  public func removeEntry(id: UUID) async throws -> Bool {
     guard let indexOf = entriesSubject
       .value
       .firstIndex(where: { $0.id == id }) else {
@@ -49,7 +49,7 @@ public final class TestEntriesRepository: EntriesRepository {
     fatalError("Not implemented...")
   }
 
-  public func removeEntry(id: Int) async throws -> Bool {
+  public func removeEntry(id: UUID) async throws -> Bool {
     fatalError("Not implemented...")
   }
 }

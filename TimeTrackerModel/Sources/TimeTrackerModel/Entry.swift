@@ -1,7 +1,7 @@
 import Foundation
 
 public struct Entry: Equatable, Identifiable {
-  public let id: Int
+  public let id: UUID
   public let description: String
   public let start: Date
   public let end: Date?
@@ -24,7 +24,7 @@ public struct Entry: Equatable, Identifiable {
   }
 
   public init(
-    id: Int,
+    id: UUID,
     description: String,
     start: Date,
     end: Date? = nil
@@ -39,7 +39,7 @@ public struct Entry: Equatable, Identifiable {
 public extension Entry {
   static var mock: Entry {
     Entry(
-      id: (0...1000000).randomElement()!,
+      id: UUID(),
       description: "Work on the assignment",
       start: Date(),
       end: nil

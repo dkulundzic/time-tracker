@@ -22,8 +22,9 @@ struct HomeView: View {
       .onFirstAppear {
         viewStore.send(.onFirstAppear)
       }
-      .animation(.default, value: viewStore.entries)
+      .scrollDismissesKeyboard(.immediately)
       .listStyle(PlainListStyle())
+      .animation(.default, value: viewStore.entries)
     }
     .navigationTitle("Home")
   }

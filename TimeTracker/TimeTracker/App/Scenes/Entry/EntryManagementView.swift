@@ -4,6 +4,7 @@ import TimeTrackerDomain
 
 struct EntryManagementView: View {
   let store: StoreOf<EntryManagementReducer>
+  @FocusState private var isTextFieldFocused: Bool
 
   var body: some View {
     WithViewStore(store, observe: { $0 }) { viewStore in
@@ -22,22 +23,25 @@ struct EntryManagementView: View {
             Text(elapsedTime)
               .font(.callout)
               .fontWeight(.medium)
-              .foregroundColor(Asset.Colors.accentColor)
           }
 
           Button {
             viewStore.send(.onActionInvoked)
           } label: {
-            Image(systemName: viewStore.startDate != nil ? "stop.fill" : "play.fill")
+            Image(
+              systemName: viewStore.startDate != nil ? "stop.fill" : "play.fill"
+            )
           }
           .disabled(!viewStore.isEligibleToStart)
           .opacity(viewStore.isEligibleToStart ? 1.0 : 0.0)
+          .foregroundColor(Color(Asset.Colors.eggplant))
         }
       }
       .padding()
       .background(
         RoundedRectangle(cornerRadius: 16)
           .fill(.white)
+          .shadow(color: Color(Asset.Colors.slateGray), radius: 8)
       )
       .animation(.default, value: viewStore.isEligibleToStart)
       .animation(.default, value: viewStore.isStarted)
@@ -53,10 +57,7 @@ struct HomeNewEntryView_Previews: PreviewProvider {
         reducer: EntryManagementReducer()
       )
     )
-    .background(
-      RoundedRectangle(cornerRadius: 16)
-        .fill(.quaternary)
-    )
+    .padding()
     .previewLayout(.sizeThatFits)
   }
 }

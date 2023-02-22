@@ -7,12 +7,22 @@ struct TimeTrackerApp: App {
   var body: some Scene {
     WindowGroup {
       NavigationStack {
-        HomeView(
-          store: Store(
-            initialState: .init(),
-            reducer: HomeReducer()
+        ZStack(alignment: .bottom) {
+          HomeView(
+            store: Store(
+              initialState: .init(),
+              reducer: HomeReducer()
+            )
           )
-        )
+
+          EntryManagementView(
+            store: Store(
+              initialState: .init(),
+              reducer: EntryManagementReducer()
+            )
+          )
+          .padding()
+        }
       }
     }
   }

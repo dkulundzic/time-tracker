@@ -11,7 +11,7 @@ struct EntryManagementView: View {
       HStack {
 #warning("TODO: Localise")
         TextField(
-          "Description",
+          "New entry",
           text: viewStore.binding(
             get: \.description,
             send: { .onDescriptionChanged($0) }
@@ -41,10 +41,14 @@ struct EntryManagementView: View {
       .background(
         RoundedRectangle(cornerRadius: 16)
           .fill(.white)
-          .shadow(color: Color(Asset.Colors.slateGray), radius: 8)
+          .shadow(
+            color: Color(Asset.Colors.slateGray).opacity(0.5),
+            radius: 4
+          )
       )
       .animation(.default, value: viewStore.isEligibleToStart)
       .animation(.default, value: viewStore.isStarted)
+      .onFirstAppear { viewStore.send(.onFirstAppeared) }
     }
   }
 }

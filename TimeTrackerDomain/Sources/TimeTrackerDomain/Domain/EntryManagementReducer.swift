@@ -11,6 +11,7 @@ public final class EntryManagementReducer: ReducerProtocol {
 
 
   public enum Action {
+    case onFirstAppeared
     case onDescriptionChanged(String)
     case onActionInvoked
     case onEntryStarted
@@ -21,14 +22,13 @@ public final class EntryManagementReducer: ReducerProtocol {
   }
 
   public struct State: Equatable {
+    var runningEntry: Entry?
     public var elapsedTime: String?
     public var isEligibleToStart = false
     public var description = ""
-    public var startDate: Date?
-    public var endDate: Date?
 
     public var isStarted: Bool {
-      startDate != nil
+      runningEntry?.start != nil
     }
 
     public init() { }
@@ -37,8 +37,7 @@ public final class EntryManagementReducer: ReducerProtocol {
       elapsedTime = nil
       isEligibleToStart = false
       description = ""
-      startDate = nil
-      endDate = nil
+      runningEntry = nil
     }
   }
 
@@ -53,6 +52,9 @@ public extension EntryManagementReducer {
     action: Action
   ) -> EffectTask<Action> {
     switch action {
+    case .onFirstAppeared:
+      return .none
+
     case .onDescriptionChanged(let description):
       state.description = description
       state.isEligibleToStart = !description.isEmpty
@@ -62,14 +64,13 @@ public extension EntryManagementReducer {
       return !state.isStarted ? .send(.onEntryStarted) : .send(.onEntryCompleted)
 
     case .onEntryStarted:
-      let startDate = Date()
-      state.startDate = startDate
-
       let entry = Entry(
-        id: uuid.callAsFunction(),
+        id: state.runningEntry?.id ?? uuid.callAsFunction(),
         description: state.description,
-        start: startDate
+        start: Date()
       )
+
+      state.runningEntry = entry
 
       return
         .task { [self] in
@@ -87,22 +88,16 @@ public extension EntryManagementReducer {
         )
 
     case .onEntryCompleted:
-      guard let startDate = state.startDate else { return .none }
+      guard var runningEntry = state.runningEntry else {
+        return .none
+      }
 
-      let endDate = Date()
-      state.endDate = endDate
-
-      let entry = Entry(
-        id: uuid.callAsFunction(),
-        description: state.description,
-        start: startDate,
-        end: endDate
-      )
+      runningEntry.end = Date()
 
       return
-        .task { [self] in
+        .task { [self, runningEntry] in
           return await .onEntryCompletionPersisted(
-            TaskResult { _ = try await self.entriesRepository.storeEntry(entry) }
+            TaskResult { _ = try await self.entriesRepository.storeEntry(runningEntry) }
           )
         }
 
@@ -122,19 +117,9 @@ public extension EntryManagementReducer {
       return .cancel(id: TimerID.self)
 
     case .onEntryTimerTicked:
-      guard let startDate = state.startDate else { return .none }
+      guard let startDate = state.runningEntry?.start else { return .none }
       state.elapsedTime = timerFormatter.string(from: startDate, to: Date())
       return .none
     }
-  }
-}
-
-private extension EntryManagementReducer {
-  func handleEntryStart(state: inout State) {
-    state.startDate = Date()
-  }
-
-  func handleEntryCompletion(state: inout State) {
-    state.endDate = Date()
   }
 }

@@ -1,10 +1,10 @@
 import Foundation
 
-public struct Entry: Equatable, Identifiable, Codable {
-  public let id: UUID
-  public let description: String
-  public let start: Date
-  public let end: Date?
+public struct Entry: Hashable, Identifiable, Codable, CustomStringConvertible {
+  public var id: UUID
+  public var end: Date?
+  public var description: String
+  public var start: Date
 
   public var duration: Duration {
     Duration.seconds(
@@ -21,6 +21,10 @@ public struct Entry: Equatable, Identifiable, Codable {
 
   public static func ==(lhs: Entry, rhs: Entry) -> Bool {
     lhs.id == rhs.id
+  }
+
+  public func hash(into hasher: inout Hasher) {
+    hasher.combine(id)
   }
 
   public init(

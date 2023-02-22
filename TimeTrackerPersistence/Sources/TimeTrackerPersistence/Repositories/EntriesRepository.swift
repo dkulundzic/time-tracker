@@ -4,17 +4,28 @@ import ComposableArchitecture
 import TimeTrackerModel
 
 public protocol EntriesRepository {
-  var entries: AnyPublisher<[Entry], Never> { get }
-  func fetchEntries() async throws
+  var entries: [Entry] { get }
+  var entriesPublisher: AnyPublisher<[Entry], Never> { get }
+  var runningEntry: Entry? { get }
+  @discardableResult func fetchEntries() async throws -> [Entry]
   func storeEntry(_ entry: Entry) async throws -> Entry
   func removeEntry(id: UUID) async throws -> Bool
 }
 
 public final class DefaultEntriesRepository: EntriesRepository {
-  public var entries: AnyPublisher<[Entry], Never> {
+  public var entries: [Entry] {
+    entriesSubject.value
+  }
+
+  public var entriesPublisher: AnyPublisher<[Entry], Never> {
     entriesSubject
+      .map { Array(Set($0)) }
       .removeDuplicates()
       .eraseToAnyPublisher()
+  }
+
+  public var runningEntry: Entry? {
+    entriesSubject.value.first(where: { !$0.isCompleted })
   }
 
   @Dependency(\.entriesStore) private var entriesStore
@@ -22,18 +33,21 @@ public final class DefaultEntriesRepository: EntriesRepository {
   private let entriesSubject = CurrentValueSubject<[Entry], Never>([])
 
   public init() {
+    entriesSubject.value = entriesStore.get() ?? []
     setupObserving()
   }
 
-  public func fetchEntries() async throws {
+  public func fetchEntries() async throws -> [Entry] {
     entriesSubject.value = entriesStore.get() ?? []
+    return entriesSubject.value
   }
 
   public func storeEntry(_ entry: Entry) async throws -> Entry {
-    guard !entriesSubject.value.contains(entry) else {
-      return entry
+    if let indexOf = entriesSubject.value.firstIndex(of: entry) {
+      entriesSubject.value[indexOf] = entry
+    } else {
+      entriesSubject.value.append(entry)
     }
-    entriesSubject.value.append(entry)
     return entry
   }
 
@@ -59,10 +73,12 @@ public final class DefaultEntriesRepository: EntriesRepository {
 }
 
 public final class TestEntriesRepository: EntriesRepository {
-  public let entries = PassthroughSubject<[Entry], Never>().eraseToAnyPublisher()
+  public var runningEntry: Entry?
+  public let entries: [Entry] = []
+  public let entriesPublisher = PassthroughSubject<[Entry], Never>().eraseToAnyPublisher()
   public init() { }
 
-  public func fetchEntries() async throws { }
+  public func fetchEntries() async throws -> [Entry] { [] }
 
   public func storeEntry(_ entry: TimeTrackerModel.Entry) async throws -> Entry {
     fatalError("Not implemented...")

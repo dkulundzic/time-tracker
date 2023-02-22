@@ -28,8 +28,7 @@ public extension HomeReducer {
     switch action {
     case .onFirstAppear:
       return .run { [self] in
-        try await entriesRepository.fetchEntries()
-        for await value in self.entriesRepository.entries.values {
+        for await value in self.entriesRepository.entriesPublisher.values {
           await $0(
             .onEntriesLoaded(
               value.filter { $0.isCompleted }

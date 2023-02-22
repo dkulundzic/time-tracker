@@ -1,5 +1,6 @@
 import Foundation
 import Combine
+import ComposableArchitecture
 import TimeTrackerModel
 
 public protocol EntriesRepository {
@@ -11,14 +12,22 @@ public protocol EntriesRepository {
 
 public final class DefaultEntriesRepository: EntriesRepository {
   public var entries: AnyPublisher<[Entry], Never> {
-    entriesSubject.eraseToAnyPublisher()
+    entriesSubject
+      .removeDuplicates()
+      .eraseToAnyPublisher()
   }
 
+  @Dependency(\.entriesStore) private var entriesStore
+  private var bag = Set<AnyCancellable>()
   private let entriesSubject = CurrentValueSubject<[Entry], Never>([])
 
-  public init() { }
+  public init() {
+    setupObserving()
+  }
 
-  public func fetchEntries() async throws { }
+  public func fetchEntries() async throws {
+    entriesSubject.value = entriesStore.get() ?? []
+  }
 
   public func storeEntry(_ entry: Entry) async throws -> Entry {
     guard !entriesSubject.value.contains(entry) else {
@@ -36,6 +45,16 @@ public final class DefaultEntriesRepository: EntriesRepository {
     }
     entriesSubject.value.remove(at: indexOf)
     return true
+  }
+
+  private func setupObserving() {
+    entriesSubject
+      .removeDuplicates()
+      .debounce(for: 0.05, scheduler: DispatchQueue.main)
+      .sink { [weak self] entries in
+        self?.entriesStore.set(entries: entries)
+      }
+      .store(in: &bag)
   }
 }
 

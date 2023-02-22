@@ -1,0 +1,9 @@
+xcassets:
+  - inputs:
+    - TimeTracker/Resources/Assets/Images.xcassets
+    - TimeTracker/Resources/Assets/Colors.xcassets
+    outputs:
+      - templateName: swift5
+        params:
+          forceProvidesNamespaces: true
+        output: TimeTracker/Resources/Assets/Generated/Assets.swift

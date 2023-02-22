@@ -11,9 +11,12 @@
 		2F118CE529A4FB690094F1CF /* HomeListItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F118CE429A4FB690094F1CF /* HomeListItemView.swift */; };
 		2F118CE729A4FEA80094F1CF /* EntryManagementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F118CE629A4FEA80094F1CF /* EntryManagementView.swift */; };
 		2F118CEC29A519BF0094F1CF /* ViewFirstAppearModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F118CEB29A519BF0094F1CF /* ViewFirstAppearModifier.swift */; };
+		2F118CF029A611010094F1CF /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2F118CEF29A611010094F1CF /* Colors.xcassets */; };
+		2F118CF629A612A70094F1CF /* Asset+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F118CF529A612A70094F1CF /* Asset+Utils.swift */; };
+		2F118CF829A612B80094F1CF /* Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F118CF729A612B80094F1CF /* Assets.swift */; };
 		2F49A9D929A4E6CC00258559 /* TimeTrackerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F49A9D829A4E6CC00258559 /* TimeTrackerApp.swift */; };
 		2F49A9DB29A4E6CC00258559 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F49A9DA29A4E6CC00258559 /* HomeView.swift */; };
-		2F49A9DD29A4E6CD00258559 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2F49A9DC29A4E6CD00258559 /* Assets.xcassets */; };
+		2F49A9DD29A4E6CD00258559 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2F49A9DC29A4E6CD00258559 /* Images.xcassets */; };
 		2F49A9E029A4E6CD00258559 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2F49A9DF29A4E6CD00258559 /* Preview Assets.xcassets */; };
 		2F49A9F629A4E86F00258559 /* TimeTrackerDomain in Frameworks */ = {isa = PBXBuildFile; productRef = 2F49A9F529A4E86F00258559 /* TimeTrackerDomain */; };
 		2F49A9F829A4E86F00258559 /* TimeTrackerModel in Frameworks */ = {isa = PBXBuildFile; productRef = 2F49A9F729A4E86F00258559 /* TimeTrackerModel */; };
@@ -25,10 +28,13 @@
 		2F118CE429A4FB690094F1CF /* HomeListItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeListItemView.swift; sourceTree = "<group>"; };
 		2F118CE629A4FEA80094F1CF /* EntryManagementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryManagementView.swift; sourceTree = "<group>"; };
 		2F118CEB29A519BF0094F1CF /* ViewFirstAppearModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewFirstAppearModifier.swift; sourceTree = "<group>"; };
+		2F118CEF29A611010094F1CF /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
+		2F118CF529A612A70094F1CF /* Asset+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Asset+Utils.swift"; sourceTree = "<group>"; };
+		2F118CF729A612B80094F1CF /* Assets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Assets.swift; sourceTree = "<group>"; };
 		2F49A9D529A4E6CC00258559 /* TimeTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TimeTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F49A9D829A4E6CC00258559 /* TimeTrackerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTrackerApp.swift; sourceTree = "<group>"; };
 		2F49A9DA29A4E6CC00258559 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
-		2F49A9DC29A4E6CD00258559 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		2F49A9DC29A4E6CD00258559 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		2F49A9DF29A4E6CD00258559 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		2F49A9EA29A4E83700258559 /* TimeTrackerDomain */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = TimeTrackerDomain; path = ../TimeTrackerDomain; sourceTree = "<group>"; };
 		2F49A9EB29A4E83C00258559 /* TimeTrackerModel */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = TimeTrackerModel; path = ../TimeTrackerModel; sourceTree = "<group>"; };
@@ -53,6 +59,7 @@
 		2F118CE829A519AF0094F1CF /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				2F118CF329A6129C0094F1CF /* Extensions */,
 				2F118CE929A519B60094F1CF /* UI */,
 			);
 			path = Common;
@@ -80,6 +87,40 @@
 				2F118CE629A4FEA80094F1CF /* EntryManagementView.swift */,
 			);
 			path = Entry;
+			sourceTree = "<group>";
+		};
+		2F118CEE29A610F90094F1CF /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				2F118CF129A611E20094F1CF /* Generated */,
+				2F49A9DC29A4E6CD00258559 /* Images.xcassets */,
+				2F118CEF29A611010094F1CF /* Colors.xcassets */,
+			);
+			path = Assets;
+			sourceTree = "<group>";
+		};
+		2F118CF129A611E20094F1CF /* Generated */ = {
+			isa = PBXGroup;
+			children = (
+				2F118CF729A612B80094F1CF /* Assets.swift */,
+			);
+			path = Generated;
+			sourceTree = "<group>";
+		};
+		2F118CF329A6129C0094F1CF /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				2F118CF429A612A00094F1CF /* SwiftUI */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		2F118CF429A612A00094F1CF /* SwiftUI */ = {
+			isa = PBXGroup;
+			children = (
+				2F118CF529A612A70094F1CF /* Asset+Utils.swift */,
+			);
+			path = SwiftUI;
 			sourceTree = "<group>";
 		};
 		2F49A9CC29A4E6CC00258559 = {
@@ -141,7 +182,7 @@
 		2F49A9E829A4E6F500258559 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				2F49A9DC29A4E6CD00258559 /* Assets.xcassets */,
+				2F118CEE29A610F90094F1CF /* Assets */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -184,6 +225,7 @@
 				2F49A9D129A4E6CC00258559 /* Sources */,
 				2F49A9D229A4E6CC00258559 /* Frameworks */,
 				2F49A9D329A4E6CC00258559 /* Resources */,
+				2F118CF229A6120E0094F1CF /* Run SwiftGen */,
 			);
 			buildRules = (
 			);
@@ -240,14 +282,34 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2F118CF029A611010094F1CF /* Colors.xcassets in Resources */,
 				2F49A9E029A4E6CD00258559 /* Preview Assets.xcassets in Resources */,
-				2F49A9DD29A4E6CD00258559 /* Assets.xcassets in Resources */,
+				2F49A9DD29A4E6CD00258559 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		2F118CF229A6120E0094F1CF /* Run SwiftGen */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Run SwiftGen";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "export PATH=$PATH:\"/opt/homebrew/bin\"\nif which swiftgen >/dev/null; then\n  swiftgen\nelse\n  echo \"warning: SwiftGen is not installed. See 'https://github.com/SwiftGen/SwiftGen#installation' for installation instructions.\"\nfi \n";
+		};
 		2F49A9F329A4E84E00258559 /* Run SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
@@ -274,7 +336,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2F118CF629A612A70094F1CF /* Asset+Utils.swift in Sources */,
 				2F118CE729A4FEA80094F1CF /* EntryManagementView.swift in Sources */,
+				2F118CF829A612B80094F1CF /* Assets.swift in Sources */,
 				2F118CE529A4FB690094F1CF /* HomeListItemView.swift in Sources */,
 				2F118CE329A4FB060094F1CF /* HomeListView.swift in Sources */,
 				2F118CEC29A519BF0094F1CF /* ViewFirstAppearModifier.swift in Sources */,

@@ -15,6 +15,7 @@ let package = Package(
   dependencies: [
     .package(path: "../TimeTrackerModel"),
     .package(url: "https://github.com/groue/GRDB.swift.git", from: "6.7.0"),
+    .package(url: "https://github.com/pointfreeco/swift-composable-architecture", from: "0.51.0")
   ],
   targets: [
     // Targets are the basic building blocks of a package. A target can define a module or a test suite.
@@ -23,10 +24,14 @@ let package = Package(
       name: "TimeTrackerPersistence",
       dependencies: [
         "TimeTrackerModel",
-        .product(name: "GRDB", package: "GRDB.swift")
+        .product(name: "GRDB", package: "GRDB.swift"),
+        .product(name: "ComposableArchitecture", package: "swift-composable-architecture")
       ]),
     .testTarget(
       name: "TimeTrackerPersistenceTests",
-      dependencies: ["TimeTrackerPersistence"]),
+      dependencies: [
+        "TimeTrackerPersistence",
+        .product(name: "ComposableArchitecture", package: "swift-composable-architecture")
+      ])
   ]
 )

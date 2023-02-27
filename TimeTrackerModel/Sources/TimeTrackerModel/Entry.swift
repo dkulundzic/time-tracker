@@ -34,11 +34,16 @@ public struct Entry: Hashable, Identifiable, Codable, CustomStringConvertible {
 
 public extension Entry {
   static var mock: Entry {
-    Entry(
-      id: UUID(),
-      description: "Work on the assignment",
+    let id = UUID()
+    return Entry(
+      id: id,
+      description: id.uuidString,
       start: Date(),
-      end: Date().addingTimeInterval(7200)
+      end: Date().addingTimeInterval(
+        TimeInterval(
+          (0...14400).randomElement()!
+        )
+      )
     )
   }
 }

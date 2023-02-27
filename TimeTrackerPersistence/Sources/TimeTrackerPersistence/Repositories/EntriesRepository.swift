@@ -94,16 +94,21 @@ public final class InMemoryEntriesRepository: EntriesRepository {
 }
 
 public final class TestEntriesRepository: EntriesRepository {
-  public let entriesPublisher = PassthroughSubject<[Entry], Never>().eraseToAnyPublisher()
-  public init() { }
+  public var entriesPublisher: AnyPublisher<[Entry], Never> {
+    entriesSubject.eraseToAnyPublisher()
+  }
+
+  private let entriesSubject: CurrentValueSubject<[Entry], Never>
+
+  public init(
+    mockedEntries: [Entry] = []
+  ) {
+    entriesSubject = CurrentValueSubject<[Entry], Never>(mockedEntries)
+  }
 
   public func fetchEntries() async throws -> [Entry] { [] }
 
-  public func storeEntry(_ entry: Entry) async throws -> Entry {
-    unimplemented()
-  }
+  public func storeEntry(_ entry: Entry) async throws -> Entry { entry }
 
-  public func removeEntry(id: UUID) async throws -> Bool {
-    unimplemented()
-  }
+  public func removeEntry(id: UUID) async throws -> Bool { true }
 }

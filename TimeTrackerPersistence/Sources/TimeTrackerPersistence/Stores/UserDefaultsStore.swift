@@ -11,6 +11,6 @@ final class UserDefaultsStore: EntriesStore {
   }
 
   func set(entries: [Entry]?) {
-    self._entries = entries
+    _entries = entries
   }
 }

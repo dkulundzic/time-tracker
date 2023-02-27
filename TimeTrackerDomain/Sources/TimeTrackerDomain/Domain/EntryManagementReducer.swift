@@ -14,18 +14,20 @@ public final class EntryManagementReducer: ReducerProtocol {
     case onFirstAppeared
     case onDescriptionChanged(String)
     case onActionInvoked
-    case onEntryStarted
+    case onRunningEntryDetected(Entry)
+    case onEntryStart
     case onEntryStartPersisted(TaskResult<Void>)
-    case onEntryCompleted
+    case onEntryCompletion
     case onEntryCompletionPersisted(TaskResult<Void>)
     case onEntryTimerTicked
   }
 
   public struct State: Equatable {
     var runningEntry: Entry?
-    public var elapsedTime: String?
-    public var isEligibleToStart = false
     public var description = ""
+    public var isActionEnabled = false
+    public var isActionVisible = false
+    public var elapsedTime: String?
 
     public var isStarted: Bool {
       runningEntry?.start != nil
@@ -35,7 +37,8 @@ public final class EntryManagementReducer: ReducerProtocol {
 
     mutating func reset() {
       elapsedTime = nil
-      isEligibleToStart = false
+      isActionEnabled = false
+      isActionVisible = false
       description = ""
       runningEntry = nil
     }
@@ -53,21 +56,40 @@ public extension EntryManagementReducer {
   ) -> EffectTask<Action> {
     switch action {
     case .onFirstAppeared:
-      return .none
+      guard let alreadyRunningEntry = entriesRepository
+        .entries
+        .first(where: { !$0.isCompleted })
+      else {
+        return .none
+      }
+      return
+        .send(
+          .onDescriptionChanged(alreadyRunningEntry.description)
+        )
+        .concatenate(
+          with: .send(
+            .onRunningEntryDetected(alreadyRunningEntry)
+          )
+        )
 
     case .onDescriptionChanged(let description):
       state.description = description
-      state.isEligibleToStart = !description.isEmpty
+      state.isActionEnabled = true
+      state.isActionVisible = true
       return .none
 
     case .onActionInvoked:
-      return !state.isStarted ? .send(.onEntryStarted) : .send(.onEntryCompleted)
+      return !state.isStarted ? .send(.onEntryStart) : .send(.onEntryCompletion)
 
-    case .onEntryStarted:
+    case .onRunningEntryDetected(let entry):
+      state.runningEntry = entry
+      return .send(.onEntryStart)
+
+    case .onEntryStart:
       let entry = Entry(
         id: state.runningEntry?.id ?? uuid.callAsFunction(),
-        description: state.description,
-        start: Date()
+        description: state.runningEntry?.description ?? state.description,
+        start: state.runningEntry?.start ?? Date()
       )
 
       state.runningEntry = entry
@@ -87,7 +109,7 @@ public extension EntryManagementReducer {
           .cancellable(id: TimerID.self)
         )
 
-    case .onEntryCompleted:
+    case .onEntryCompletion:
       guard var runningEntry = state.runningEntry else {
         return .none
       }

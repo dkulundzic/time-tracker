@@ -18,15 +18,7 @@ public struct Entry: Hashable, Identifiable, Codable, CustomStringConvertible {
   public var isCompleted: Bool {
     end != nil
   }
-
-  public static func ==(lhs: Entry, rhs: Entry) -> Bool {
-    lhs.id == rhs.id
-  }
-
-  public func hash(into hasher: inout Hasher) {
-    hasher.combine(id)
-  }
-
+  
   public init(
     id: UUID,
     description: String,

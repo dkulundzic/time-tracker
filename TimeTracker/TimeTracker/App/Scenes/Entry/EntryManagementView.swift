@@ -29,11 +29,11 @@ struct EntryManagementView: View {
             viewStore.send(.onActionInvoked)
           } label: {
             Image(
-              systemName: viewStore.startDate != nil ? "stop.fill" : "play.fill"
+              systemName: viewStore.isStarted ? "stop.fill" : "play.fill"
             )
           }
-          .disabled(!viewStore.isEligibleToStart)
-          .opacity(viewStore.isEligibleToStart ? 1.0 : 0.0)
+          .disabled(!viewStore.isActionEnabled)
+          .opacity(viewStore.isActionVisible ? 1.0 : 0.0)
           .foregroundColor(Color(Asset.Colors.eggplant))
         }
       }
@@ -46,7 +46,8 @@ struct EntryManagementView: View {
             radius: 4
           )
       )
-      .animation(.default, value: viewStore.isEligibleToStart)
+      .animation(.default, value: viewStore.isActionVisible)
+      .animation(.default, value: viewStore.isActionEnabled)
       .animation(.default, value: viewStore.isStarted)
       .onFirstAppear { viewStore.send(.onFirstAppeared) }
     }

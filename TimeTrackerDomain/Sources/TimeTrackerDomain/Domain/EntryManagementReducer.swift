@@ -56,21 +56,20 @@ public extension EntryManagementReducer {
   ) -> EffectTask<Action> {
     switch action {
     case .onFirstAppeared:
-      guard let alreadyRunningEntry = entriesRepository
-        .entries
-        .first(where: { !$0.isCompleted })
-      else {
-        return .none
-      }
-      return
-        .send(
-          .onDescriptionChanged(alreadyRunningEntry.description)
-        )
-        .concatenate(
-          with: .send(
+      return .run { [entriesRepository = self.entriesRepository] send in
+        for await value in entriesRepository.entriesPublisher.first().values {
+          guard let alreadyRunningEntry = value.first(where: { !$0.isCompleted }) else { return }
+
+          await send(
+            .onDescriptionChanged(alreadyRunningEntry.description)
+
+          )
+          await send(
             .onRunningEntryDetected(alreadyRunningEntry)
           )
-        )
+        }
+      }
+
 
     case .onDescriptionChanged(let description):
       state.description = description
@@ -126,7 +125,7 @@ public extension EntryManagementReducer {
     case .onEntryStartPersisted(.success):
       return .none
 
-    case .onEntryStartPersisted(.failure(let error)):
+    case .onEntryStartPersisted(.failure(_)):
       state.reset()
       return .cancel(id: TimerID.self)
 
@@ -134,7 +133,7 @@ public extension EntryManagementReducer {
       state.reset()
       return .cancel(id: TimerID.self)
 
-    case .onEntryCompletionPersisted(.failure(let error)):
+    case .onEntryCompletionPersisted(.failure(_)):
       state.reset()
       return .cancel(id: TimerID.self)
 

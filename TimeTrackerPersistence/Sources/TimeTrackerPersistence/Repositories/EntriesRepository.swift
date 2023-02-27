@@ -4,7 +4,6 @@ import ComposableArchitecture
 import TimeTrackerModel
 
 public protocol EntriesRepository {
-  var entries: [Entry] { get }
   var entriesPublisher: AnyPublisher<[Entry], Never> { get }
   @discardableResult func fetchEntries() async throws -> [Entry]
   func storeEntry(_ entry: Entry) async throws -> Entry
@@ -12,10 +11,6 @@ public protocol EntriesRepository {
 }
 
 public final class UserDefaultsEntriesRepository: EntriesRepository {
-  public var entries: [Entry] {
-    entriesSubject.value
-  }
-
   public var entriesPublisher: AnyPublisher<[Entry], Never> {
     entriesSubject.eraseToAnyPublisher()
   }
@@ -55,6 +50,7 @@ public final class UserDefaultsEntriesRepository: EntriesRepository {
 
   private func setupObserving() {
     entriesSubject
+      .dropFirst()
       .removeDuplicates()
       .debounce(for: 0.01, scheduler: DispatchQueue.main)
       .sink { [weak self] entries in
@@ -65,10 +61,6 @@ public final class UserDefaultsEntriesRepository: EntriesRepository {
 }
 
 public final class InMemoryEntriesRepository: EntriesRepository {
-  public var entries: [Entry] {
-    entriesSubject.value
-  }
-
   public var entriesPublisher: AnyPublisher<[Entry], Never> {
     entriesSubject.eraseToAnyPublisher()
   }
@@ -102,7 +94,6 @@ public final class InMemoryEntriesRepository: EntriesRepository {
 }
 
 public final class TestEntriesRepository: EntriesRepository {
-  public let entries: [Entry] = []
   public let entriesPublisher = PassthroughSubject<[Entry], Never>().eraseToAnyPublisher()
   public init() { }
 

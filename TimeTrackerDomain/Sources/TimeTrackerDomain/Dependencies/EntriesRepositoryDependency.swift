@@ -2,7 +2,7 @@ import ComposableArchitecture
 import TimeTrackerPersistence
 
 private enum EntriesRepositoryKey: DependencyKey {
-  static let liveValue: EntriesRepository = InMemoryEntriesRepository()
+  static let liveValue: EntriesRepository = UserDefaultsEntriesRepository()
   static var testValue: EntriesRepository = TestEntriesRepository()
 }
 

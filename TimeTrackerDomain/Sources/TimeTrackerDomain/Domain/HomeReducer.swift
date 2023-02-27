@@ -27,9 +27,9 @@ public extension HomeReducer {
   ) -> EffectTask<Action> {
     switch action {
     case .onFirstAppear:
-      return .run { [self] in
+      return .run { [self] send in
         for await value in self.entriesRepository.entriesPublisher.values {
-          await $0(
+          await send(
             .onEntriesLoaded(
               value.filter { $0.isCompleted }
             )

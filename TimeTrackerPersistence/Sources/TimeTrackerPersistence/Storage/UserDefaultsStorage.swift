@@ -46,7 +46,7 @@ public struct UserDefaultsCodableStorage<T: Codable> {
   public init(
     key: Key,
     defaultValue: T? = nil,
-    userDefaults: UserDefaults = .standard
+    userDefaults: UserDefaults = UserDefaults(suiteName: "time-tracker-storage")!
   ) {
     self.key = key
     self.defaultValue = defaultValue

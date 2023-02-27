@@ -109,10 +109,10 @@ public final class TestEntriesRepository: EntriesRepository {
   public func fetchEntries() async throws -> [Entry] { [] }
 
   public func storeEntry(_ entry: Entry) async throws -> Entry {
-    fatalError("Not implemented...")
+    unimplemented()
   }
 
   public func removeEntry(id: UUID) async throws -> Bool {
-    fatalError("Not implemented...")
+    unimplemented()
   }
 }

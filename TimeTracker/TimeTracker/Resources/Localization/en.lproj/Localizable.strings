@@ -1,0 +1,9 @@
+// MARK: Actions
+"action_delete" = "Delete";
+
+// MARK: Home
+"home_entry_list_item_logged_time_format" = "Logged time: %@";
+"home_entry_list_empty_message" = "No entries yet tracked.";
+
+// MARK: - Entry Management
+"entry_management_text_field_placeholder" = "New entry";

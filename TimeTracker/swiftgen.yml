@@ -7,3 +7,9 @@ xcassets:
         params:
           forceProvidesNamespaces: true
         output: TimeTracker/Resources/Assets/Generated/Assets.swift
+
+strings:
+  inputs: TimeTracker/Resources/Localization/en.lproj/Localizable.strings
+  outputs:
+    templateName: structured-swift5
+    output: TimeTracker/Resources/Localization/Generated/Strings.swift

@@ -9,16 +9,14 @@ struct HomeView: View {
     WithViewStore(store, observe: { $0 }) { viewStore in
       VStack {
         if viewStore.entries.isEmpty {
-#warning("TODO: Localise")
-          Text("No entries yet tracked.")
+          Text(L10n.homeEntryListEmptyMessage)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .transition(.scale.combined(with: .opacity))
         } else {
           List {
             ForEach(viewStore.entries) { entry in
               Menu {
-#warning("TODO: Localise")
-                Button("Delete", role: .destructive) {
+                Button(L10n.actionDelete, role: .destructive) {
                   viewStore.send(.onDeleteTap(entry))
                 }
               } label: {

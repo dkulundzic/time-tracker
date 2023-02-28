@@ -13,11 +13,12 @@ extension HomeView {
             .font(.body)
             .fontWeight(.black)
 
-#warning("TODO: Localise")
-          Text("Logged time: \(entry.duration.formatted())")
-            .foregroundColor(.black)
-            .font(.callout)
-            .fontWeight(.medium)
+          Text(L10n.homeEntryListItemLoggedTimeFormat(
+            entry.duration.formatted())
+          )
+          .foregroundColor(.black)
+          .font(.callout)
+          .fontWeight(.medium)
         }
         Spacer()
       }

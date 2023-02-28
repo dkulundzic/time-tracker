@@ -9,9 +9,8 @@ struct EntryManagementView: View {
   var body: some View {
     WithViewStore(store, observe: { $0 }) { viewStore in
       HStack {
-#warning("TODO: Localise")
         TextField(
-          "New entry",
+          L10n.entryManagementTextFieldPlaceholder,
           text: viewStore.binding(
             get: \.description,
             send: { .onDescriptionChanged($0) }

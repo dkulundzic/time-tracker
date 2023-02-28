@@ -13,6 +13,8 @@
 		2F118CF029A611010094F1CF /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2F118CEF29A611010094F1CF /* Colors.xcassets */; };
 		2F118CF629A612A70094F1CF /* Asset+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F118CF529A612A70094F1CF /* Asset+Utils.swift */; };
 		2F118CF829A612B80094F1CF /* Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F118CF729A612B80094F1CF /* Assets.swift */; };
+		2F1A42FD29AE5990008B2BB5 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2F1A42FF29AE5990008B2BB5 /* Localizable.strings */; };
+		2F1A430129AE59D9008B2BB5 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F1A430029AE59D9008B2BB5 /* Strings.swift */; };
 		2F49A9D929A4E6CC00258559 /* TimeTrackerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F49A9D829A4E6CC00258559 /* TimeTrackerApp.swift */; };
 		2F49A9DB29A4E6CC00258559 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F49A9DA29A4E6CC00258559 /* HomeView.swift */; };
 		2F49A9DD29A4E6CD00258559 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2F49A9DC29A4E6CD00258559 /* Images.xcassets */; };
@@ -29,6 +31,8 @@
 		2F118CEF29A611010094F1CF /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		2F118CF529A612A70094F1CF /* Asset+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Asset+Utils.swift"; sourceTree = "<group>"; };
 		2F118CF729A612B80094F1CF /* Assets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Assets.swift; sourceTree = "<group>"; };
+		2F1A42FE29AE5990008B2BB5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		2F1A430029AE59D9008B2BB5 /* Strings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
 		2F49A9D529A4E6CC00258559 /* TimeTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TimeTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F49A9D829A4E6CC00258559 /* TimeTrackerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTrackerApp.swift; sourceTree = "<group>"; };
 		2F49A9DA29A4E6CC00258559 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -121,6 +125,23 @@
 			path = SwiftUI;
 			sourceTree = "<group>";
 		};
+		2F1A42F929AE597D008B2BB5 /* Localization */ = {
+			isa = PBXGroup;
+			children = (
+				2F1A42FA29AE5985008B2BB5 /* Generated */,
+				2F1A42FF29AE5990008B2BB5 /* Localizable.strings */,
+			);
+			path = Localization;
+			sourceTree = "<group>";
+		};
+		2F1A42FA29AE5985008B2BB5 /* Generated */ = {
+			isa = PBXGroup;
+			children = (
+				2F1A430029AE59D9008B2BB5 /* Strings.swift */,
+			);
+			path = Generated;
+			sourceTree = "<group>";
+		};
 		2F49A9CC29A4E6CC00258559 = {
 			isa = PBXGroup;
 			children = (
@@ -181,6 +202,7 @@
 			isa = PBXGroup;
 			children = (
 				2F118CEE29A610F90094F1CF /* Assets */,
+				2F1A42F929AE597D008B2BB5 /* Localization */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -262,7 +284,6 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
-				Base,
 			);
 			mainGroup = 2F49A9CC29A4E6CC00258559;
 			productRefGroup = 2F49A9D629A4E6CC00258559 /* Products */;
@@ -280,6 +301,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2F118CF029A611010094F1CF /* Colors.xcassets in Resources */,
+				2F1A42FD29AE5990008B2BB5 /* Localizable.strings in Resources */,
 				2F49A9E029A4E6CD00258559 /* Preview Assets.xcassets in Resources */,
 				2F49A9DD29A4E6CD00258559 /* Images.xcassets in Resources */,
 			);
@@ -335,6 +357,7 @@
 			files = (
 				2F118CF629A612A70094F1CF /* Asset+Utils.swift in Sources */,
 				2F118CE729A4FEA80094F1CF /* EntryManagementView.swift in Sources */,
+				2F1A430129AE59D9008B2BB5 /* Strings.swift in Sources */,
 				2F118CF829A612B80094F1CF /* Assets.swift in Sources */,
 				2F118CE529A4FB690094F1CF /* HomeItemView.swift in Sources */,
 				2F118CEC29A519BF0094F1CF /* ViewFirstAppearModifier.swift in Sources */,
@@ -359,6 +382,17 @@
 			productRef = 2F49A9F129A4E84800258559 /* TimeTrackerPersistence */;
 		};
 /* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		2F1A42FF29AE5990008B2BB5 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2F1A42FE29AE5990008B2BB5 /* en */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		2F49A9E129A4E6CD00258559 /* Debug */ = {

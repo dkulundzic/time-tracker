@@ -34,7 +34,7 @@ struct HomeView: View {
         viewStore.send(.onFirstAppear)
       }
     }
-    .navigationTitle("Home")
+    .navigationTitle(L10n.homeTitle)
   }
 }
 

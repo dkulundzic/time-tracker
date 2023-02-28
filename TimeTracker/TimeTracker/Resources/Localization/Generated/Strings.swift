@@ -20,6 +20,8 @@ internal enum L10n {
   internal static func homeEntryListItemLoggedTimeFormat(_ p1: Any) -> String {
     return L10n.tr("Localizable", "home_entry_list_item_logged_time_format", String(describing: p1), fallback: "Logged time: %@")
   }
+  /// Home
+  internal static let homeTitle = L10n.tr("Localizable", "home_title", fallback: "Home")
 }
 // swiftlint:enable explicit_type_interface function_parameter_count identifier_name line_length
 // swiftlint:enable nesting type_body_length type_name vertical_whitespace_opening_braces

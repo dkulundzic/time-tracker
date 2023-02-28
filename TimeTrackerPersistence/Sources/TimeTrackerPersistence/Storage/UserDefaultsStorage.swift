@@ -2,11 +2,7 @@ import Foundation
 import TimeTrackerModel
 
 @propertyWrapper
-public struct UserDefaultsStorage<T> {
-  public enum Key: String {
-    case entries
-  }
-
+public struct UserDefaultsStorage<T, Key> where Key: RawRepresentable<String> {
   private let key: Key
   private let defaultValue: T?
   private let userDefaults: UserDefaults
@@ -32,11 +28,7 @@ public struct UserDefaultsStorage<T> {
 }
 
 @propertyWrapper
-public struct UserDefaultsCodableStorage<T: Codable> {
-  public enum Key: String {
-    case entries
-  }
-
+public struct UserDefaultsCodableStorage<T: Codable, Key> where Key: RawRepresentable<String> {
   private lazy var decoder = JSONDecoder()
   private lazy var encoder = JSONEncoder()
   private let key: Key

@@ -2,13 +2,17 @@ import Foundation
 import ComposableArchitecture
 
 private enum TimerFormatterKey: DependencyKey {
-  static var liveValue = {
+  static let liveValue = {
     let formatter = DateComponentsFormatter()
     formatter.unitsStyle = .short
     formatter.allowedUnits = [.hour, .minute, .second]
     formatter.zeroFormattingBehavior = .dropAll
     return formatter
   }()
+
+  static var testValue: DateComponentsFormatter {
+    liveValue
+  }
 }
 
 extension DependencyValues {

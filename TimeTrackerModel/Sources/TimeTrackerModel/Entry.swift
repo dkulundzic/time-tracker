@@ -46,4 +46,14 @@ public extension Entry {
       )
     )
   }
+
+  static var mockIncomplete: Entry {
+    let id = UUID()
+    return Entry(
+      id: id,
+      description: id.uuidString,
+      start: Date(),
+      end: nil
+    )
+  }
 }

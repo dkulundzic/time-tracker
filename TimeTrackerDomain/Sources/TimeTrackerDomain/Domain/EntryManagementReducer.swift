@@ -8,17 +8,18 @@ public final class EntryManagementReducer: ReducerProtocol {
   @Dependency(\.continuousClock) private var clock
   @Dependency(\.uuid) private var uuid
   @Dependency(\.timerFormatter) private var timerFormatter
+  @Dependency(\.date) private var date
 
 
-  public enum Action {
+  public enum Action: Equatable {
     case onFirstAppeared
     case onDescriptionChanged(String)
     case onActionInvoked
     case onRunningEntryDetected(Entry)
     case onEntryStart
-    case onEntryStartPersisted(TaskResult<Void>)
+    case onEntryStartPersisted(TaskResult<Entry>)
     case onEntryCompletion
-    case onEntryCompletionPersisted(TaskResult<Void>)
+    case onEntryCompletionPersisted(TaskResult<Entry>)
     case onEntryTimerTicked
   }
 
@@ -73,8 +74,8 @@ public extension EntryManagementReducer {
 
     case .onDescriptionChanged(let description):
       state.description = description
-      state.isActionEnabled = true
-      state.isActionVisible = true
+      state.isActionEnabled = !description.isEmpty
+      state.isActionVisible = !description.isEmpty
       return .none
 
     case .onActionInvoked:
@@ -88,7 +89,7 @@ public extension EntryManagementReducer {
       let entry = Entry(
         id: state.runningEntry?.id ?? uuid.callAsFunction(),
         description: state.runningEntry?.description ?? state.description,
-        start: state.runningEntry?.start ?? Date()
+        start: state.runningEntry?.start ?? date.now
       )
 
       state.runningEntry = entry
@@ -96,7 +97,7 @@ public extension EntryManagementReducer {
       return
         .task { [self] in
           return await .onEntryStartPersisted(
-            TaskResult { _ = try await self.entriesRepository.storeEntry(entry) }
+            TaskResult { try await self.entriesRepository.storeEntry(entry) }
           )
         }
         .concatenate(
@@ -113,12 +114,12 @@ public extension EntryManagementReducer {
         return .none
       }
 
-      runningEntry.end = Date()
+      runningEntry.end = date.now
 
       return
         .task { [self, runningEntry] in
           return await .onEntryCompletionPersisted(
-            TaskResult { _ = try await self.entriesRepository.storeEntry(runningEntry) }
+            TaskResult { try await self.entriesRepository.storeEntry(runningEntry) }
           )
         }
 
@@ -139,7 +140,7 @@ public extension EntryManagementReducer {
 
     case .onEntryTimerTicked:
       guard let startDate = state.runningEntry?.start else { return .none }
-      state.elapsedTime = timerFormatter.string(from: startDate, to: Date())
+      state.elapsedTime = timerFormatter.string(from: startDate, to: date.now)
       return .none
     }
   }

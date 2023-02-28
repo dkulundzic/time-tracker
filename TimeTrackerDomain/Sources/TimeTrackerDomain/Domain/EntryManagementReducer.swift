@@ -65,7 +65,6 @@ public extension EntryManagementReducer {
 
           await send(
             .onDescriptionChanged(alreadyRunningEntry.description)
-
           )
           await send(
             .onRunningEntryDetected(alreadyRunningEntry)

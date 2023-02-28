@@ -82,11 +82,10 @@ final class EntryManagementReducerTests: XCTestCase {
   }
 
   func testEntryCompletion() async {
-    let entry: Entry = .mockIncomplete
     let reducer = EntryManagementReducer()
     let store = TestStore(
       initialState: EntryManagementReducer.State(
-        runningEntry: entry
+        runningEntry: .mockIncomplete
       ),
       reducer: reducer
     ) {
@@ -106,6 +105,36 @@ final class EntryManagementReducerTests: XCTestCase {
       $0.isActionVisible = false
       $0.description = ""
       $0.runningEntry = nil
+    }
+  }
+
+  func testTimerTickWithoutRunningEntry() async {
+    let reducer = EntryManagementReducer()
+    let store = TestStore(
+      initialState: EntryManagementReducer.State(),
+      reducer: reducer
+    ) {
+      $0.uuid = .incrementing
+    }
+
+    await store.send(.onEntryTimerTicked)
+  }
+
+  func testTimerTickWithRunningEntry() async {
+    let entry: Entry = .mockIncomplete
+    let reducer = EntryManagementReducer()
+    let store = TestStore(
+      initialState: EntryManagementReducer.State(runningEntry: entry),
+      reducer: reducer
+    ) {
+      $0.uuid = .incrementing
+      $0.date = .constant(.now)
+      $0.continuousClock = clock
+    }
+
+    await clock.advance(by: .seconds(1))
+    await store.send(.onEntryTimerTicked) {
+      $0.elapsedTime = "0 s"
     }
   }
 }

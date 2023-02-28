@@ -45,7 +45,7 @@ final class EntryManagementReducerTests: XCTestCase {
     }
   }
 
-  func testActionInvoked() async {
+  func testEntryStart() async {
     let reducer = EntryManagementReducer()
     let store = TestStore(
       initialState: EntryManagementReducer.State(),
@@ -79,5 +79,33 @@ final class EntryManagementReducerTests: XCTestCase {
     await store.receive(.onEntryTimerTicked)
 
     await task.cancel()
+  }
+
+  func testEntryCompletion() async {
+    let entry: Entry = .mockIncomplete
+    let reducer = EntryManagementReducer()
+    let store = TestStore(
+      initialState: EntryManagementReducer.State(
+        runningEntry: entry
+      ),
+      reducer: reducer
+    ) {
+      $0.uuid = .incrementing
+      $0.date = .constant(.now)
+    }
+
+    await store.send(.onEntryCompletion) {
+      $0.runningEntry?.end = store.dependencies.date.now
+    }
+
+    await store.receive(
+      .onEntryCompletionPersisted(.success(store.state.runningEntry!))
+    ) {
+      $0.elapsedTime = nil
+      $0.isActionEnabled = false
+      $0.isActionVisible = false
+      $0.description = ""
+      $0.runningEntry = nil
+    }
   }
 }

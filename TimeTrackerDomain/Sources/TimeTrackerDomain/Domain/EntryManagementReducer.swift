@@ -34,7 +34,9 @@ public final class EntryManagementReducer: ReducerProtocol {
       runningEntry?.start != nil
     }
 
-    public init() { }
+    public init(runningEntry: Entry? = nil) {
+      self.runningEntry = runningEntry
+    }
 
     mutating func reset() {
       elapsedTime = nil
@@ -115,11 +117,14 @@ public extension EntryManagementReducer {
       }
 
       runningEntry.end = date.now
+      state.runningEntry = runningEntry
 
       return
         .task { [self, runningEntry] in
           return await .onEntryCompletionPersisted(
-            TaskResult { try await self.entriesRepository.storeEntry(runningEntry) }
+            TaskResult {
+              try await self.entriesRepository.storeEntry(runningEntry)
+            }
           )
         }
 

@@ -93,6 +93,7 @@ public extension EntryManagementReducer {
         start: state.runningEntry?.start ?? date.now
       )
 
+      state.elapsedTime = timerFormatter.string(from: entry.start, to: date.now)
       state.runningEntry = entry
 
       return

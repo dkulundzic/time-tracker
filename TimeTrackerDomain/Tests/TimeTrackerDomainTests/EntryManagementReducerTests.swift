@@ -59,21 +59,24 @@ final class EntryManagementReducerTests: XCTestCase {
     let task = await store.send(.onActionInvoked)
 
     await store.receive(.onEntryStart) {
+      let startDate = store.dependencies.date.now
       $0.runningEntry = Entry(
         id: UUID(uuidString: "00000000-0000-0000-0000-000000000000")!,
         description: "",
-        start: store.dependencies.date.now
+        start: startDate
+      )
+      $0.elapsedTime = store.dependencies.timerFormatter.string(
+        from: startDate,
+        to: store.dependencies.date.now
       )
     }
-
+    
     await store.receive(
       .onEntryStartPersisted(.success(store.state.runningEntry!))
     )
 
     await clock.advance(by: .seconds(1))
-    await store.receive(.onEntryTimerTicked) {
-      $0.elapsedTime = "0 s"
-    }
+    await store.receive(.onEntryTimerTicked)
 
     await clock.advance(by: .seconds(1))
     await store.receive(.onEntryTimerTicked)

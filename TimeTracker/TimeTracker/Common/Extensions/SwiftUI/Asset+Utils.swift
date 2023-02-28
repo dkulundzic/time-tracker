@@ -5,6 +5,7 @@ extension SwiftUI.Color {
     self.init(asset.name)
   }
 }
+
 extension Text {
   func foregroundColor(_ colorAsset: ColorAsset) -> Text {
     foregroundColor(SwiftUI.Color(colorAsset))

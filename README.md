@@ -16,6 +16,7 @@ The are no requirements for project set-up, other than opening the `.xcworkspace
 all pieces together. 
 
 An `.xcworkspace` was chosen as it's a clean and efficient way of grouping multiple packages and projects together.
+
 In example, if we wanted to add a `macOS` project, we could easily do so by adding it to the `.xcworkspace` and linking
 the different packages.
 

@@ -27,6 +27,11 @@ The app provides the following features:
 3. Enables the user to complete an entry.
 4. Persists entries using `UserDefaults`.
 5. Persists, tracks and restarts running entries through app launches.
+6. Extendable, as everything's modularised.
+
+## Resource handling
+
+Assets and Localization are processed with the industry standard tool for typed resources - [SwiftGen](https://github.com/SwiftGen/SwiftGen).
 
 ## Tests
 

@@ -115,6 +115,7 @@ public extension EntryManagementReducer {
         return .none
       }
 
+      runningEntry.description = state.description
       runningEntry.end = date.now
       state.runningEntry = runningEntry
 

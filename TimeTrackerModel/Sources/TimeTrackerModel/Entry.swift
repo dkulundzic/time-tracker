@@ -1,7 +1,7 @@
 import Foundation
 
 public struct Entry: Hashable, Identifiable, Codable, CustomStringConvertible {
-  public var id: UUID
+  public let id: UUID
   public var end: Date?
   public var description: String
   public var start: Date

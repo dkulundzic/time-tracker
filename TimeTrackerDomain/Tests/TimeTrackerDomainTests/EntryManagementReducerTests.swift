@@ -93,7 +93,15 @@ final class EntryManagementReducerTests: XCTestCase {
       $0.date = .constant(.now)
     }
 
+    let description = "Test description"
+    await store.send(.onDescriptionChanged(description)) {
+      $0.description = description
+      $0.isActionVisible = true
+      $0.isActionEnabled = true
+    }
+
     await store.send(.onEntryCompletion) {
+      $0.runningEntry?.description = description
       $0.runningEntry?.end = store.dependencies.date.now
     }
 

@@ -1,4 +1,4 @@
-# time-tracker
+# Time Tracker
 
 ## Important! 
 

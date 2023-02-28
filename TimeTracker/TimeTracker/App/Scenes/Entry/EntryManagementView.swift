@@ -28,8 +28,11 @@ struct EntryManagementView: View {
             viewStore.send(.onActionInvoked)
           } label: {
             Image(
-              systemName: viewStore.isStarted ? "stop.fill" : "play.fill"
+              asset: viewStore.isStarted ? Asset.Images.Icons.stop : Asset.Images.Icons.play
             )
+            .renderingMode(.template)
+            .resizable()
+            .frame(width: 18, height: 18)
           }
           .disabled(!viewStore.isActionEnabled)
           .opacity(viewStore.isActionVisible ? 1.0 : 0.0)

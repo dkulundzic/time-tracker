@@ -23,11 +23,12 @@ the different packages.
 
 The app provides the following features:
 1. Shows a list of already entered entries.
-2. Enables the user to start a new entry. 
-3. Enables the user to complete an entry.
-4. Persists entries using `UserDefaults`.
-5. Persists, tracks and restarts running entries through app launches.
-6. Extendable, as everything's modularised.
+2. Enables the user to delete an entry by long-pressing the entry.
+3. Enables the user to start a new entry. 
+4. Enables the user to complete an entry.
+5. Persists entries using `UserDefaults`.
+6. Persists, tracks and restarts running entries through app launches.
+7. Extendable, as everything's modularised.
 
 ## Resource handling
 
